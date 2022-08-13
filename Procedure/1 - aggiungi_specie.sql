@@ -22,6 +22,6 @@ BEGIN
 		values (var_codiceSpecie, var_nomeLatino, var_nomeComune, var_giacenza, var_interno, var_esotica, GETDATE());
 		
 		insert into `Prezzo` (`specie`, `dataInizio`, `valore`)
-		values (var_codiceSpecie, GETDATE(), var_valore)
+		values (var_codiceSpecie, curdate(), var_valore)
 	commit;
 END
