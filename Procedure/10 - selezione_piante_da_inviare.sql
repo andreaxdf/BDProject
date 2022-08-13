@@ -17,6 +17,7 @@ BEGIN
 	declare var_quantità INT;
 	declare var_quantita2 INT;
 	
+	-- possiamo togliere questo cursore e accedere direttamente a Contiene tramite il codice ordine
 	declare cur_pacchi cursor for
 		select `numeroPacco`
 		from `Pacco`
@@ -51,13 +52,12 @@ BEGIN
 				where `ordine`=var_codiceOrdine 
 				and `numeroPacco`=var_numeroPacco;
 			
-			declare continue handler for not found set done2 = true;
 			open cur_piante;
 			
 			read_loop2: loop
 				set var_quantita2 = 0;
 				fetch cur_piante into var_specie, var_quantità;
-				if done2 then
+				if done then
 					leave read_loop2;
 				end if;
 				----------- Da rivedere
@@ -74,6 +74,7 @@ BEGIN
 				end if;
 				-----------------------
 			end loop;
+			set done = false;
 
 		end loop;
 		
@@ -83,8 +84,10 @@ BEGIN
 			from `Richiede`
 			where `ordine`=var_codiceOrdine;
 		
-		-- fare sottrazione tra piante inviate e piante richieste
+		-- fare sottrazione delle quantità tra piante richieste e piante inviate
 		
+		select `specie`, `PianteRichieste`.`quantità` - `PianteInviate`.`quantità`
+		from `PianteInviate` join `PianteRichieste` on `PianteInviate`.`specie` = `PianteRichieste`.`specie`; --cosa succede se PianteInviate.quantità == null?
 		
 	commit;
 END

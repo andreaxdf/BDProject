@@ -20,7 +20,7 @@ BEGIN
 		values (var_codiceSpecie, var_date, var_prezzo);
 		
 		update `Specie` 
-			set dataPrezzoAttuale = var_date
-			where codiceSpecie = var_codiceSpecie;
+			set `dataPrezzoAttuale` = var_date
+			where `codiceSpecie` = var_codiceSpecie;
 	commit;
 END
