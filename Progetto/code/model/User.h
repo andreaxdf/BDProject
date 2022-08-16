@@ -9,9 +9,8 @@ typedef struct {
 } User;
 
 typedef enum {
-    CLIENTE = 0,
-    MANAGER = 1,
-    OPERATORE = 2,
-    DIPARTIMENTO_MAGAZINO = 3,
-    LOGIN = 4
+    AMMINISTRAZIONE = 0,
+    SEGRETERIA,
+    INSEGNANTE,
+    LOGIN
 } Role;

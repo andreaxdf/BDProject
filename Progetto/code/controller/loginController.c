@@ -5,7 +5,6 @@
 #include "../view/loginView.h"
 #include "loginController.h"
 #include "../model/User.h"
-#include "../database/DatabaseLogin.h"
 
 void successLogin(Role loginRole, char* username) {
     clearScreen();
@@ -15,39 +14,41 @@ void successLogin(Role loginRole, char* username) {
         return;
     }
 
-    /*switch (loginRole) {
-        case AMMINISTRAZIONE:
-            administrationController();
-            break;
-        case SEGRETERIA:
-            secretaryController();
-            break;
-        case INSEGNANTE:
-            teacherController(username);
-            break;
-        case LOGIN:
-            break;
+    switch (loginRole) {
+    case AMMINISTRAZIONE:
+        administrationController();
+        break;
+    case SEGRETERIA:
+        secretaryController();
+        break;
+    case INSEGNANTE:
+        teacherController(username);
+        break;
+    case LOGIN:
+        break;
     }
 
     switchRole(LOGIN);
 
     clearScreen();
     showHeader();
-    */
-    printf("loginRole");
 }
 
 void loginController() {
     User loginCredentials;
 
+
     do {
         memset(&loginCredentials, 0, sizeof(User));
         Role loginRole = LOGIN;
 
-        if (showLoginView(&loginCredentials)) {
+        if (!showLoginView(&loginCredentials)) {
+            loginRole = LOGIN;
+        }
+        else {
             loginRole = attemptLogin(&loginCredentials);
             if (loginRole == LOGIN) {
-                colorPrint("Username e/o Password non validi\n\n", RED_TEXT);
+                colorPrint("Username e/o Password Non Valida\n\n", RED_TEXT);
             }
             else {
                 successLogin(loginRole, loginCredentials.username);
