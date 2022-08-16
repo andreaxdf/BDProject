@@ -3,8 +3,9 @@
 #include <string.h>
 #include <stdio.h>
 
-#include "../View/mainView.h"
-#include "../Controller/LoginController.h"
+#include "../view/mainView.h"
+#include "../config/environmentSetter.h"
+#include "../controller/LoginController.h"
 
 int main() {
 	showHeader();
