@@ -4,6 +4,7 @@
 #include <stdio.h>
 
 #include "../view/mainView.h"
+#include "../database/connector.h"
 #include "../config/environmentSetter.h"
 #include "../controller/loginController.h"
 
@@ -12,7 +13,7 @@ int main() {
 	if (!loadConfiguration()) {
 		exitWithError("Errore nella configuazione dell'ambiente.");
 	}
-	if (connectToDatabase() && compileTimeRegex()) {
+	if (connectToDatabase()) {
 		login();
 	}
 }

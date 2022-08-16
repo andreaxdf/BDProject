@@ -38,7 +38,6 @@ bool loadConfiguration() {
     return true;
 }
 
-
 bool setEnvironmentVariable(char* environmentToken) {
     //Function to parse Environment Variable from configuration file
     char* tokenName = strtok(environmentToken, "=");
