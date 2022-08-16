@@ -3,8 +3,8 @@
 #include <string.h>
 #include <stdio.h>
 
-#include "MainHeader.h"
-#include "LoginController.h"
+#include "../View/mainView.h"
+#include "../Controller/LoginController.h"
 
 int main() {
 	showHeader();
