@@ -5,7 +5,7 @@
 
 #include "../view/mainView.h"
 #include "../config/environmentSetter.h"
-#include "../controller/LoginController.h"
+#include "../controller/loginController.h"
 
 int main() {
 	showHeader();
