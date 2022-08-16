@@ -68,7 +68,7 @@ Role attemptLogin(User *loginCredentials) {
 
 }
 
-
+/*
 bool switchRole(Role role) {
     char *databaseName = getenv("DB.NAME") ;
     char *username ;
@@ -104,4 +104,4 @@ bool switchRole(Role role) {
     }
 
     return true ;
-}
+}*/
