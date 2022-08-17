@@ -1,7 +1,6 @@
 #include <stdbool.h>
 #include <stdlib.h>
 #include <string.h>
-
 #include "../view/loginView.h"
 #include "loginController.h"
 #include "../utils/SystemUtilsHeader.h"
