@@ -5,7 +5,7 @@
 #include "../view/loginView.h"
 #include "loginController.h"
 #include "../model/User.h"
-#include "../database/DatabaseLogin.h"
+#include "../database/databaseLogin.h"
 
 void successLogin(Role loginRole, char* username) {
     clearScreen();

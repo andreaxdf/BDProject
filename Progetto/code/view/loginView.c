@@ -1,4 +1,4 @@
-#include "LoginView.h"
+#include "loginView.h"
 
 bool showLoginView(User* loginCredentialsPtr) {
 
