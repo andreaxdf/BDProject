@@ -6,6 +6,7 @@
 #include "loginController.h"
 #include "../utils/SystemUtilsHeader.h"
 #include "../utils/IOUtils.h"
+#include "../view/ViewUtilsHeader.h"
 #include "../model/User.h"
 #include "../database/databaseLogin.h"
 

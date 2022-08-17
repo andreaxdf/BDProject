@@ -7,6 +7,9 @@
 #include "../database/connector.h"
 #include "../config/environmentSetter.h"
 #include "../controller/loginController.h"
+#include "../view/ViewUtilsHeader.h"
+#include "../utils/SystemUtilsHeader.h"
+#include "../utils/TimeUtils.h"
 
 int main() {
 	showHeader();
