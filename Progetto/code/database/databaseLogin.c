@@ -67,8 +67,9 @@ Role attemptLogin(User *loginCredentials) {
 
 }
 
-/*
+
 bool switchRole(Role role) {
+	/*
     char *databaseName = getenv("DB.NAME") ;
     char *username ;
     char *password ;
@@ -101,6 +102,6 @@ bool switchRole(Role role) {
         printMysqlError(conn, "Impossibile Cambiare Privilegi Utente") ;
         return false ;
     }
-
+	*/
     return true ;
-}*/
+}
