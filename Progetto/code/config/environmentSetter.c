@@ -5,7 +5,7 @@
 
 #include "environmentSetter.h"
 
-const char* CONFIGURATION_FILE_NAME = "code/config/configuration.properties";
+const char* CONFIGURATION_FILE_NAME = "config/configuration.properties";
 
 bool setEnvironmentVariable(char* environmentToken);
 
