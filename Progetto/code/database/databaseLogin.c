@@ -1,4 +1,4 @@
-#include "DatabaseLogin.h"
+#include "databaseLogin.h"
 #include <mysql/mysql.h>
 #include "../controller/loginController.h"
 #include "connector.h"
