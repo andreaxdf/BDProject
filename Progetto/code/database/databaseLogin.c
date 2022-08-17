@@ -77,7 +77,7 @@ bool switchRole(Role role) {
     switch(role) {
         case AMMINISTRAZIONE :
             username = getenv(DB_AMMINISTRAZIONE_USER) ;
-            password = getenv(DB_AMMINISTRAZIONE_PASSWD) ;
+            password = getenv(DB_AMMINISTRAZIONE_PASSWD) ; 
             break ;
         case SEGRETERIA :
             username = getenv(DB_SEGRETERIA_USER) ;
