@@ -9,6 +9,7 @@
 
 Role attemptLogin(User *loginCredentials) {
     MYSQL_STMT *loginProcedure ;
+    printf("username -> %s \npassword -> %s", loginCredentials->username, loginCredentials->password)
     if (!setupPreparedStatement(&loginProcedure, "CALL login(?,?,?) ", conn)) {
         printMysqlError(conn, "Impossibile Preparare Procedura 'Login'") ;
         return false ;
