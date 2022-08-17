@@ -4,6 +4,8 @@
 
 #include "../view/loginView.h"
 #include "loginController.h"
+#include "../utils/SystemUtilsHeader.h"
+#include "../utils/IOUtils.h"
 #include "../model/User.h"
 #include "../database/databaseLogin.h"
 
