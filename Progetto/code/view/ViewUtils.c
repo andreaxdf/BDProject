@@ -39,17 +39,8 @@ void clearScreen() {
     printf("\033[2J\033[H");
 }
 
-void printHeaderLine(int headerLenght) {
-    for (int i = 0 ; i < headerLenght ; i++) {
-        if (i == 0 || i == headerLenght - 1) putchar('+') ;
-        else putchar('-') ;
-    }
-}
-
 void showAppHeader() {
-    char *appTitleHeader = "| English School Management System |" ;
-    printHeaderLine(strlen(appTitleHeader)) ;
-    printf("\n%s\n", appTitleHeader) ;
-    printHeaderLine(strlen(appTitleHeader)) ;
-    printf("\n") ;
+	puts("******************************************");
+	puts("* Azienda Verde S.r.l. Management System *");
+	puts("******************************************");
 }
