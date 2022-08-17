@@ -40,7 +40,7 @@ void successLogin(Role loginRole, char* username) {
     printf("loginRole");
 }
 
-void loginController() {
+void login() {
     User loginCredentials;
 
     do {

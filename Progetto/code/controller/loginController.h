@@ -3,4 +3,4 @@
 #include <stdbool.h>
 
 
-void loginController() ;
+void login() ;
