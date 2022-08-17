@@ -12,7 +12,7 @@
 
 void successLogin(Role loginRole, char* username) {
     clearScreen();
-    showHeader();
+    showAppHeader();
 
     if (switchRole(loginRole) == false) {
         return;
@@ -35,7 +35,7 @@ void successLogin(Role loginRole, char* username) {
     switchRole(LOGIN);
 
     clearScreen();
-    showHeader();
+    showAppHeader();
     */
     printf("loginRole");
 }
