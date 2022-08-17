@@ -1,7 +1,7 @@
 #pragma once
 
 #include <stdbool.h>
-#include "../controller/LoginControllerHeader.h"
+#include "../controller/loginController.h"
 #include "DatabaseUtilsHeader.h"
 #include "../model/User.h"
 

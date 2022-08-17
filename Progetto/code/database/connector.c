@@ -1,6 +1,7 @@
 #include <stdbool.h>
 #include <stdio.h>
 #include <mysql/mysql.h>
+#include <connector.h>
 
 MYSQL* conn;
 

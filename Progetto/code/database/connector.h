@@ -2,7 +2,7 @@
 
 #include <stdbool.h>
 #include <mysql/mysql.h>
-#include "../controller/LoginControllerHeader.h"
+#include "../controller/loginController.h"
 #include "../model/User.h"
 
 #define DB_HOST "DB.HOST"
