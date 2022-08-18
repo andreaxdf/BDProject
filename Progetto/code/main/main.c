@@ -16,7 +16,7 @@ int main() {
 	if (!loadConfiguration()) {
 		exitWithError("Errore nella configuazione dell'ambiente.");
 	}
-	if (connectToDatabase()) {
+	if (connectToDatabase() && compileTimeRegex()) {
 		login();
 	}
 }
