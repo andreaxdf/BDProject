@@ -1,5 +1,20 @@
 #include "IOUtils.h"
+#include "../model/Price.h"
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+#include <stdarg.h>
+#include <errno.h>
+#include <ctype.h>
+#include <limits.h>
+#include "systemUtils.h"
 
+
+
+
+void getDateString(Date date, char* result) {
+    sprintf(result, "%d-%d-%d", date.day, date.month, date.year);
+}
 
 void printError(char *errorMessage) {
     colorPrint(errorMessage, RED_TEXT) ;
@@ -13,7 +28,8 @@ bool getUserInput(char *requestString, char *resultBuffer, int bufferSize) {
         bufferSize comprende nel conto lo \0
     */
 
-    printf("%s", requestString) ;
+    //printf("%s", requestString) ;
+    colorPrint(requestString, GREEN_TEXT);
 
     //Alloco un buffer di dimensione pari alla massima dimensione valida per l'input più uno per lo \n
     char inputBuffer[bufferSize + 1] ;
@@ -75,46 +91,13 @@ void colorPrint(char *printText , TextColorEnum colorEnum) {
     printf("\033[%dm%s\033[m", color, printText) ;
 } 
 
-
-bool getDateFromUser(Date *datePtr, char *requestString) {
-    char dateString[strlen("yyyy-mm-dd") + 1] ;
-    if (!(getUserInput(requestString, dateString, strlen("yyyy-mm-dd") + 1))) {
-        printError("Errore Inserimento Data") ;
-        return false ;
-    }
-
-    if (!verifyAndParseDate(datePtr, dateString)) {
-        printError("Formato della Data Inserita non Valido") ;
-        return false ;
-    }
-
-    return true ;
-}
-
-bool getTimeFromUser(Time *timePtr, char *requestString) {
-
-    char timeString[strlen("hh:mm") + 1] ;
-    if (!(getUserInput(requestString, timeString, strlen("hh:mm") + 1))) {
-        printError("Errore Inserimento Orario") ;
-        return false ;
-    }
-
-    if (!verifyAndParseTime(timePtr, timeString)) {
-        printError("Formato Orario Inserito non Valido") ;
-        return false ;
-    }
-
-    return true ;
-}
-
-
 bool getIntegerFromUser(int *integerPtr, char *resultMessage) {
     char integerStringBuff[11 + 1] ;
     if (!getUserInput(resultMessage, integerStringBuff, 11 + 1)) {
         printError("Errore Inserimento Codice Numerico") ;
         return false ;
     }
-
+    errno = 0;
     char *checkString = "\0" ;
     long longInput = strtol(integerStringBuff, &checkString, 10) ;
     if (errno != 0) {
@@ -131,4 +114,83 @@ bool getIntegerFromUser(int *integerPtr, char *resultMessage) {
     *integerPtr = (int) longInput ;
     
     return true ;
+}
+
+bool getCode(char* message,int* codice) {
+    colorPrint(message, GREEN_TEXT);
+    if(!getIntegerFromUser(codice, "Codice >>> ")) {
+        return false;
+    }
+
+    return true;
+}
+
+/*
+    Funzione che chiede l'input fino a quando non si richiede di uscire.
+    - request: stringa da mostrare all'utente per la richesta.
+    - resultBuffer: buffer in cui inserire il risultato.
+    - bufferSize: dimensione buffer.
+*/
+bool getWhileInputView(char* request, char* resultBuffer, int bufferSize) {
+    char message[150];
+    sprintf(message, "%s >>> ", request);
+    while(!getUserInput(message, resultBuffer, bufferSize)) {
+        char errorMessage[150];
+        sprintf(errorMessage, "Errore Lettura %s. Inserirlo nuovamente. \nPer annullare l'opearazione di inserimento, inserire 'cancel'.\n", request);
+        printError(errorMessage);
+    }
+    if(strcmp(resultBuffer, "cancel") == 0) {
+        return false;
+    }
+    return true;
+}
+
+bool getWhileIntegerInputView(char* request, int* result) {
+    char message[150];
+    sprintf(message, "%s >>> ", request);
+    while(!getIntegerFromUser(result, message)) {
+        char errorMessage[150];
+        sprintf(errorMessage, "Errore Lettura %s. Inserirlo nuovamente. \nPer annullare l'opearazione di inserimento, inserire '-1'.\n", request);
+        printError(errorMessage);
+    }
+    if(*result == -1) {
+        return false;
+    }
+    return true;
+}
+
+bool getWhileCharInputView(char* inputString, char charTrue, char charFalse) {
+    char response;
+    char message[100];
+loop:
+    sprintf(message, "%s >>> ", inputString);
+    getUserInput(message, &response, 2);
+    if(tolower(response) == charTrue) {
+        return true;
+    } else if(tolower(response) == charFalse) {
+        return false;
+    } else {
+        printError("Errore nell'acquisizione dell'input");
+        goto loop;
+    }
+}
+
+bool getWhileDoubleInputView(char* inputString, double* result) {
+    char temp[20];
+    bool condition;
+    do {
+        if(!getWhileInputView(inputString, temp, 20)) {
+            printError("Operazione annullata.");
+            return false;
+        }
+        *result = atof(temp);
+        if(*result == 0.0) {
+            condition = false;
+            printError("Prezzo inserito non valido.");
+        } else {
+            condition = true;
+        }
+    } while(!condition);
+
+    return true;
 }

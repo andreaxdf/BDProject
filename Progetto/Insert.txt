@@ -1,0 +1,108 @@
+start transaction;
+
+INSERT INTO `verdesrlDB`.`Specie` (`codiceSpecie`, `nomeLatino`, `nomeComune`, `giacenza`, `esotica`, `interno`) VALUES ('A', 'Jasminum', 'Gelsomino', 150, 'n', 'e');
+INSERT INTO `verdesrlDB`.`Specie` (`codiceSpecie`, `nomeLatino`, `nomeComune`, `giacenza`, `esotica`, `interno`) VALUES ('B', 'Orchidaceae', 'Orchidea', 120, 'n', 'e');
+INSERT INTO `verdesrlDB`.`Specie` (`codiceSpecie`, `nomeLatino`, `nomeComune`, `giacenza`, `esotica`, `interno`) VALUES ('C', 'Cactacee', 'Cactus', 70, 'e', 'e');
+
+INSERT INTO `verdesrlDB`.`Prezzo` (`specie`, `dataInizio`, `valore`, `dataFine`) VALUES ('A', '2022-06-01', 2.80, NULL);
+INSERT INTO `verdesrlDB`.`Prezzo` (`specie`, `dataInizio`, `valore`, `dataFine`) VALUES ('A', '2022-01-01', 2.50, '2022-06-01');
+INSERT INTO `verdesrlDB`.`Prezzo` (`specie`, `dataInizio`, `valore`, `dataFine`) VALUES ('B', '2022-01-01', 5.00, NULL);
+INSERT INTO `verdesrlDB`.`Prezzo` (`specie`, `dataInizio`, `valore`, `dataFine`) VALUES ('C', '2022-06-01', 2.50, NULL);
+
+INSERT INTO `verdesrlDB`.`Indirizzo` (`codice`,`via`,`numeroCivico`,`città`) VALUES (1,'Via Passignano','22b','Lenola');
+INSERT INTO `verdesrlDB`.`Indirizzo` (`codice`,`via`,`numeroCivico`,`città`) VALUES (2,'Via Cambridge','15','Roma');
+
+INSERT INTO `verdesrlDB`.`Contattabile` (`codice`, `contattoPreferito`) VALUES (1, NULL);
+INSERT INTO `verdesrlDB`.`Contattabile` (`codice`, `contattoPreferito`) VALUES (2, NULL);
+INSERT INTO `verdesrlDB`.`Contattabile` (`codice`, `contattoPreferito`) VALUES (3, NULL);
+
+INSERT INTO `verdesrlDB`.`Contatto` (`valore`, `tipo`, `contattabile`) VALUES ('3282849161', 'cellulare', 1);
+INSERT INTO `verdesrlDB`.`Contatto` (`valore`, `tipo`, `contattabile`) VALUES ('andreadefilippis@gmail.com', 'email', 1);
+INSERT INTO `verdesrlDB`.`Contatto` (`valore`, `tipo`, `contattabile`) VALUES ('edoman@gmail.com', 'email', 2);
+INSERT INTO `verdesrlDB`.`Contatto` (`valore`, `tipo`, `contattabile`) VALUES ('luca@gmail.com', 'email', 3);
+
+update `verdesrlDB`.`Contattabile` set `contattoPreferito` = '3282849161' where `codice` = 1;
+
+INSERT INTO `verdesrlDB`.`Cliente` (`contattabile`, `tipo`, `indirizzoFatturazione`, `indirizzoResidenza`, `nome`, `codiceFiscale`, `cognome`) VALUES (1, 'P', 1, 1, 'Andrea', 'DFLNDR00E21D662Q', 'De Filippis');
+INSERT INTO `verdesrlDB`.`Cliente` (`contattabile`, `tipo`, `indirizzoFatturazione`, `indirizzoResidenza`, `nome`, `codiceFiscale`, `cognome`) VALUES (2, 'R', 1, 1, 'Impresa EdoMan', NULL, NULL);
+
+INSERT INTO `verdesrlDB`.`Referente` (`contattabile`, `nome`, `cognome`) VALUES (3, 'Luca ', 'Martorelli');
+
+INSERT INTO `verdesrlDB`.`Rivendita` (`cliente`, `partitaIVA`, `referente`) VALUES (2, '00000000000', 3);
+
+INSERT INTO `verdesrlDB`.`OrdineDiVendita` (`codiceOrdine`, `indirizzoSpedizione`, `data`, `cliente`, `contatto`) VALUES (1, 2, '2022-08-23', 1, '3282849161');
+INSERT INTO `verdesrlDB`.`OrdineDiVendita` (`codiceOrdine`, `indirizzoSpedizione`, `data`, `cliente`, `contatto`) VALUES (2, 1, '2022-08-23', 1, '3282849161');
+INSERT INTO `verdesrlDB`.`OrdineDiVendita` (`codiceOrdine`, `indirizzoSpedizione`, `data`, `cliente`, `contatto`) VALUES (3, 2, '2022-08-23', 2, 'edoman@gmail.com');
+INSERT INTO `verdesrlDB`.`OrdineDiVendita` (`codiceOrdine`, `indirizzoSpedizione`, `data`, `cliente`, `contatto`) VALUES (4, 1, '2022-08-23', 2, 'edoman@gmail.com');
+
+INSERT INTO `verdesrlDB`.`Richiede` (`ordine`, `specie`, `dataPrezzo`, `prezzo`, `quantità`) VALUES (1, 'A', '2022-06-01', 2.80, 30);
+INSERT INTO `verdesrlDB`.`Richiede` (`ordine`, `specie`, `dataPrezzo`, `prezzo`, `quantità`) VALUES (1, 'B', '2022-01-01', 5.00, 50);
+
+INSERT INTO `verdesrlDB`.`Richiede` (`ordine`, `specie`, `dataPrezzo`, `prezzo`, `quantità`) VALUES (2, 'C', '2022-06-01', 2.50, 10);
+
+INSERT INTO `verdesrlDB`.`Richiede` (`ordine`, `specie`, `dataPrezzo`, `prezzo`, `quantità`) VALUES (3, 'C', '2022-06-01', 2.50, 5);
+INSERT INTO `verdesrlDB`.`Richiede` (`ordine`, `specie`, `dataPrezzo`, `prezzo`, `quantità`) VALUES (3, 'B', '2022-01-01', 5.00, 10);
+
+INSERT INTO `verdesrlDB`.`Richiede` (`ordine`, `specie`, `dataPrezzo`, `prezzo`, `quantità`) VALUES (4, 'A', '2022-06-01', 2.80, 30);
+
+update `verdesrlDB`.`OrdineDiVendita` set `statoOrdine` = 'chiuso' where `codiceOrdine` = 1;
+update `verdesrlDB`.`OrdineDiVendita` set `statoOrdine` = 'chiuso' where `codiceOrdine` = 2;
+update `verdesrlDB`.`OrdineDiVendita` set `statoOrdine` = 'chiuso' where `codiceOrdine` = 3;
+update `verdesrlDB`.`OrdineDiVendita` set `statoOrdine` = 'chiuso' where `codiceOrdine` = 4;
+
+INSERT INTO `verdesrlDB`.`Fornitore` (`codiceFornitore`, `nome`, `codiceFiscale`) VALUES (1, 'Impresa EdoMan00', 'EDOMAN0000000000');
+INSERT INTO `verdesrlDB`.`Fornitore` (`codiceFornitore`, `nome`, `codiceFiscale`) VALUES (2, 'Mario Regine srl', 'REGINE');
+INSERT INTO `verdesrlDB`.`Fornitore` (`codiceFornitore`, `nome`, `codiceFiscale`) VALUES (3, 'Martorelli spa', 'MARTORELLI');
+
+INSERT INTO `verdesrlDB`.`Dispone` (`fornitore`, `specie`) VALUES (1, 'C');
+INSERT INTO `verdesrlDB`.`Dispone` (`fornitore`, `specie`) VALUES (1, 'A');
+INSERT INTO `verdesrlDB`.`Dispone` (`fornitore`, `specie`) VALUES (2, 'B');
+INSERT INTO `verdesrlDB`.`Dispone` (`fornitore`, `specie`) VALUES (2, 'A');
+INSERT INTO `verdesrlDB`.`Dispone` (`fornitore`, `specie`) VALUES (3, 'C');
+
+INSERT INTO `verdesrlDB`.`Ubicato` (`fornitore`, `indirizzo`) VALUES (1, 2);
+
+INSERT INTO `verdesrlDB`.`OrdineDiAcquisto` (`codice`, `fornitore`, `data`, `statoOrdine`) VALUES (1, 1, curdate(), 'chiuso');
+INSERT INTO `verdesrlDB`.`OrdineDiAcquisto` (`codice`, `fornitore`, `data`, `statoOrdine`) VALUES (2, 1, curdate(), 'aperto');
+INSERT INTO `verdesrlDB`.`OrdineDiAcquisto` (`codice`, `fornitore`, `data`, `statoOrdine`) VALUES (3, 1, curdate(), 'aperto');
+INSERT INTO `verdesrlDB`.`OrdineDiAcquisto` (`codice`, `fornitore`, `data`, `statoOrdine`) VALUES (4, 2, curdate(), 'chiuso');
+INSERT INTO `verdesrlDB`.`OrdineDiAcquisto` (`codice`, `fornitore`, `data`, `statoOrdine`) VALUES (5, 2, curdate(), 'aperto');
+INSERT INTO `verdesrlDB`.`OrdineDiAcquisto` (`codice`, `fornitore`, `data`, `statoOrdine`) VALUES (6, 3, curdate(), 'chiuso');
+INSERT INTO `verdesrlDB`.`OrdineDiAcquisto` (`codice`, `fornitore`, `data`, `statoOrdine`) VALUES (7, 3, curdate(), 'aperto');
+
+INSERT INTO `verdesrlDB`.`Fornisce` (`ordine`, `specie`, `quantità`, `prezzo`) VALUES (1, 'A', 50, 2.00);
+INSERT INTO `verdesrlDB`.`Fornisce` (`ordine`, `specie`, `quantità`, `prezzo`) VALUES (1, 'C', 40, 3.50);
+INSERT INTO `verdesrlDB`.`Fornisce` (`ordine`, `specie`, `quantità`, `prezzo`) VALUES (2, 'C', 40, 3.50);
+INSERT INTO `verdesrlDB`.`Fornisce` (`ordine`, `specie`, `quantità`, `prezzo`) VALUES (3, 'A', 20, 4.00);
+
+INSERT INTO `verdesrlDB`.`Fornisce` (`ordine`, `specie`, `quantità`, `prezzo`) VALUES (4, 'A', 50, 2.10);
+INSERT INTO `verdesrlDB`.`Fornisce` (`ordine`, `specie`, `quantità`, `prezzo`) VALUES (4, 'B', 40, 3.20);
+INSERT INTO `verdesrlDB`.`Fornisce` (`ordine`, `specie`, `quantità`, `prezzo`) VALUES (5, 'B', 40, 3.00);
+INSERT INTO `verdesrlDB`.`Fornisce` (`ordine`, `specie`, `quantità`, `prezzo`) VALUES (5, 'A', 20, 4.50);
+
+INSERT INTO `verdesrlDB`.`Fornisce` (`ordine`, `specie`, `quantità`, `prezzo`) VALUES (6, 'C', 60, 2.10);
+INSERT INTO `verdesrlDB`.`Fornisce` (`ordine`, `specie`, `quantità`, `prezzo`) VALUES (7, 'C', 20, 3.00);
+
+INSERT INTO `verdesrlDB`.`Pacco` (`ordine`, `numeroPacco`) VALUES (1, 1);
+INSERT INTO `verdesrlDB`.`Pacco` (`ordine`, `numeroPacco`) VALUES (1, 2);
+
+INSERT INTO `verdesrlDB`.`Pacco` (`ordine`, `numeroPacco`) VALUES (2, 1);
+
+INSERT INTO `verdesrlDB`.`Pacco` (`ordine`, `numeroPacco`) VALUES (3, 1);
+
+INSERT INTO `verdesrlDB`.`Pacco` (`ordine`, `numeroPacco`) VALUES (4, 1);
+INSERT INTO `verdesrlDB`.`Pacco` (`ordine`, `numeroPacco`) VALUES (4, 2);
+
+INSERT INTO `verdesrlDB`.`Contiene` (`ordine`, `numeroPacco`, `specie`, `quantità`) VALUES (1, 1, 'A', 10);
+INSERT INTO `verdesrlDB`.`Contiene` (`ordine`, `numeroPacco`, `specie`, `quantità`) VALUES (1, 1, 'B', 30);
+INSERT INTO `verdesrlDB`.`Contiene` (`ordine`, `numeroPacco`, `specie`, `quantità`) VALUES (1, 2, 'A', 20);
+INSERT INTO `verdesrlDB`.`Contiene` (`ordine`, `numeroPacco`, `specie`, `quantità`) VALUES (1, 2, 'B', 20);
+
+INSERT INTO `verdesrlDB`.`Contiene` (`ordine`, `numeroPacco`, `specie`, `quantità`) VALUES (2, 1, 'C', 10);
+
+INSERT INTO `verdesrlDB`.`Contiene` (`ordine`, `numeroPacco`, `specie`, `quantità`) VALUES (3, 1, 'C', 5);
+
+INSERT INTO `verdesrlDB`.`Contiene` (`ordine`, `numeroPacco`, `specie`, `quantità`) VALUES (4, 1, 'A', 10);
+INSERT INTO `verdesrlDB`.`Contiene` (`ordine`, `numeroPacco`, `specie`, `quantità`) VALUES (4, 2, 'A', 10);
+
+commit;

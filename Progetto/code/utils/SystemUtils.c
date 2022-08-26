@@ -1,5 +1,6 @@
 #include "IOUtils.h"
 #include <stdlib.h>
+#include <string.h>
 
 
 void exitWithError(char *errorMessage) {

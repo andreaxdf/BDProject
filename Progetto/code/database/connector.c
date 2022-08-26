@@ -1,7 +1,5 @@
-#include <stdbool.h>
-#include <stdio.h>
-#include <mysql/mysql.h>
 #include "connector.h"
+
 
 MYSQL* conn;
 
@@ -11,7 +9,8 @@ bool connectToDatabase() {
     char* databaseName = getenv(DB_NAME);
     char* loginUser = getenv(DB_LOGIN_USER);
     char* loginPassword = getenv(DB_LOGIN_PASSWD);
-	bool* reconnect = true;
+    unsigned int timeout = 300;
+	bool reconnect = true;
 
     if (host == NULL || port == NULL || loginUser == NULL || loginPassword == NULL || databaseName == NULL) {
         fprintf(stderr, "Variabili d'Ambiente non Trovate\n");
@@ -37,9 +36,11 @@ bool connectToDatabase() {
         fprintf(stderr, "Errore di Connessione al Database\n%s\n\n", mysql_error(conn));
         return false;
     }
-	
+	if (mysql_options(conn, MYSQL_OPT_CONNECT_TIMEOUT, &timeout)) {
+		printMysqlError(conn, "[mysql_options] failed.");
+	}
 	if(mysql_options(conn, MYSQL_OPT_RECONNECT, &reconnect)) {
-		print_error(conn, "[mysql_options] failed.");
+		printMysqlError(conn, "[mysql_options] failed.");
 	}
 
     return true;

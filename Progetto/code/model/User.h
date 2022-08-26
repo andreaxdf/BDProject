@@ -9,9 +9,11 @@ typedef struct {
 } User;
 
 typedef enum {
-    CLIENTE = 0,
+    SEGRETERIA = 0,
     MANAGER = 1,
     OPERATORE = 2,
-    DIPARTIMENTO_MAGAZINO = 3,
+    GESTORE_MAGAZINO = 3,
     LOGIN = 4
 } Role;
+
+void getRoleName(Role role, char* result);

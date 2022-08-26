@@ -2,7 +2,7 @@
 
 bool showLoginView(User* loginCredentialsPtr) {
 
-    printf("Inserire Credenziali:\n");
+    colorPrint("Inserire Credenziali:\n\n", GREEN_TEXT);
 
     if (!getUserInput("Username >>> ", loginCredentialsPtr->username, USERNAME_MAX_SIZE)) {
         printError("Errore Lettura Username");

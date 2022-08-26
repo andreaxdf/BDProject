@@ -1,0 +1,43 @@
+{
+    "makefile.extensionOutputFolder": "./.vscode",
+    "files.associations": {
+        "viewutils.h": "c",
+        "databaselogin.h": "c",
+        "user.h": "c",
+        "loginview.h": "c",
+        "string.h": "c",
+        "logincontroller.h": "c",
+        "secretarycontroller.h": "c",
+        "client.h": "c",
+        "secretaryview.h": "c",
+        "connector.h": "c",
+        "databaseutils.h": "c",
+        "stdbool.h": "c",
+        "address.h": "c",
+        "referente.h": "c",
+        "contact.h": "c",
+        "ioutils.h": "c",
+        "stdio.h": "c",
+        "secretarydb.h": "c",
+        "salesorder.h": "c",
+        "managercontroller.h": "c",
+        "managerdb.h": "c",
+        "plant.h": "c",
+        "choiceview.h": "c",
+        "managerview.h": "c",
+        "referent.h": "c",
+        "departmentcontroller.h": "c",
+        "departmentdb.h": "c",
+        "price.h": "c",
+        "orderrow.h": "c",
+        "supplier.h": "c",
+        "departmentview.h": "c",
+        "purchaseorder.h": "c",
+        "operatorcontroller.h": "c",
+        "operatordb.h": "c",
+        "operatorview.h": "c"
+    },
+    "C_Cpp.codeAnalysis.clangTidy.checks.disabled": [
+        "clang-analyzer-security.insecureAPI.DeprecatedOrUnsafeBufferHandling"
+    ]
+}

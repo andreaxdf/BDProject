@@ -1,7 +1,7 @@
 #include "databaseLogin.h"
 #include <mysql/mysql.h>
 #include "connector.h"
-#include "DatabaseUtilsHeader.h"
+#include "databaseUtils.h"
 #include <string.h>
 #include <stdio.h>
 #include "../utils/IOUtils.h"
@@ -9,7 +9,7 @@
 
 Role attemptLogin(User *loginCredentials) {
     MYSQL_STMT *loginProcedure ;
-    printf("username -> %s \npassword -> %s", loginCredentials->username, loginCredentials->password);
+
     if (!setupPreparedStatement(&loginProcedure, "CALL login(?,?,?) ", conn)) {
         printMysqlError(conn, "Impossibile Preparare Procedura 'Login'") ;
         return false ;
@@ -39,7 +39,7 @@ Role attemptLogin(User *loginCredentials) {
     if (mysql_stmt_execute(loginProcedure) != 0) {
         printStatementError(loginProcedure, "Impossibile Eseguire Procedeura di Login") ;
         freeStatement(loginProcedure, false) ;
-        return role ;
+        return role;
     }
 
     //Set Parametro di OUT
@@ -58,7 +58,6 @@ Role attemptLogin(User *loginCredentials) {
         printStatementError(loginProcedure, "Impossibile Recuperare Ruolo") ;
         return role ;
     }
-
     //Consumo resto del resul set attuale
     while (mysql_stmt_fetch(loginProcedure) == 0) ;
 
@@ -70,28 +69,32 @@ Role attemptLogin(User *loginCredentials) {
 
 
 bool switchRole(Role role) {
-	/*
+	
     char *databaseName = getenv("DB.NAME") ;
     char *username ;
     char *password ;
 
     switch(role) {
-        case AMMINISTRAZIONE :
-            username = getenv(DB_AMMINISTRAZIONE_USER) ;
-            password = getenv(DB_AMMINISTRAZIONE_PASSWD) ; 
-            break ;
         case SEGRETERIA :
-            username = getenv(DB_SEGRETERIA_USER) ;
-            password = getenv(DB_SEGRETERIA_PASSWD) ;
-            break ;
-        case INSEGNANTE :
-            username = getenv(DB_INSEGNANTE_USER) ;
-            password = getenv(DB_INSEGNANTE_PASSWD) ;
-            break ;
+            username = getenv(DB_SEGRETERIA_USER);
+            password = getenv(DB_SEGRETERIA_PASSWD);
+            break;
+        case MANAGER :
+            username = getenv(DB_MANAGER_USER);
+            password = getenv(DB_MANAGER_PASSWD);
+            break;
+        case GESTORE_MAGAZINO :
+            username = getenv(DB_GESTORE_USER);
+            password = getenv(DB_GESTORE_PASSWD);
+            break;
+        case OPERATORE :
+            username = getenv(DB_OPERATORE_USER);
+            password = getenv(DB_OPERATORE_PASSWD);
+            break;
         case LOGIN :
-            username = getenv(DB_LOGIN_USER) ;
-            password = getenv(DB_LOGIN_PASSWD) ;
-            break ;
+            username = getenv(DB_LOGIN_USER);
+            password = getenv(DB_LOGIN_PASSWD);
+            break;
     }
 
     if (username == NULL || password == NULL || databaseName == NULL) {
@@ -103,6 +106,6 @@ bool switchRole(Role role) {
         printMysqlError(conn, "Impossibile Cambiare Privilegi Utente") ;
         return false ;
     }
-	*/
+	
     return true ;
 }
